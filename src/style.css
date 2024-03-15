@@ -1,0 +1,31 @@
+h1,
+p {
+  font-family: Lato;
+}
+
+.login-form {
+  width: 100%;
+  max-width: 330px;
+  padding: 15px;
+  margin: auto;
+  height: 100%;
+}
+
+.btn {
+  margin-top: 15px;
+  width: 100%;
+}
+
+.Welcome {
+  text-align: center;
+}
+.img {
+  display: flex;
+  margin-top: 50px;
+  max-width: 70px;
+  align-items: center;
+}
+
+.test {
+    align-items: center;
+}
