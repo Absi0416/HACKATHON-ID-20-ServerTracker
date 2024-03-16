@@ -10,6 +10,7 @@
     "@mui/icons-material": "^5.15.12",
     "@mui/material": "^5.15.12",
     "@mui/styled-engine-sc": "^6.0.0-alpha.17",
+    "@mui/x-charts": "^6.19.5",
     "@mui/x-data-grid": "^6.19.6",
     "@reduxjs/toolkit": "^1.8.6",
     "@testing-library/jest-dom": "^5.14.1",
@@ -61,6 +62,5 @@
   "devDependencies": {
     "@types/react-alert": "^7.0.6"
   },
-
   "homepage": "http://localhost:3000/login"
 }
