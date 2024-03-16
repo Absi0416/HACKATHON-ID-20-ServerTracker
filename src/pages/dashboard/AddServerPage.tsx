@@ -3,6 +3,8 @@ import { useNavigate } from 'react-router-dom';
 import { Form, Button, FormGroup, Input, Label } from 'reactstrap';
 import { serverActions } from '../../actions/ServerActions';
 import { ServerModel } from "../../helpers/ServerModel";
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 type Props = {};
 
 const AddServerPage = (props: Props) => {
@@ -18,30 +20,22 @@ const AddServerPage = (props: Props) => {
   const registerUser = async () => {
   
     if ( serverIP.IP && credentialDB.credentialDB) {
-      //this.setState({ submitted: true });           
-      const serverDetails = { 
-        serverIp: serverIP.IP,
-        dbUserPassword: credentialDB.credentialDB, 
-        dbUserName: userName.userName, 
-        dbServerPort : DBServerPort.DBServerPort,
-        appServerPort : AppServerPort.AppServerPort,
-        user:{ id : 1}
-
-      
-      };
-      console.log(serverDetails);
-
-
-      var response = await serverActions.addServer(serverDetails);
+      var response = await serverActions.addServer(serverIP.IP,credentialDB.credentialDB,userName.userName,DBServerPort.DBServerPort,AppServerPort.AppServerPort,userId);
       if(response.statusCode == 200){
-        alert('Server Registered successfully');
+        toast.success("Server Registered successfully", {
+          position: "top-center"
+        });
         navigate('/dashboard/manageserver', { state: { reg: "manageserver" } });
       }
       else{
-        alert('Server Error');
+        toast.error("Server Error.Please contact admin", {
+          position: "top-center"
+        });
       }
     } else {
-      alert('Please fill all the details');
+      toast.error("Please fill all the details", {
+        position: "top-center"
+      });
     }
   
   };
@@ -51,6 +45,7 @@ const AddServerPage = (props: Props) => {
 
     <div id="main-registration-container">  
         <div id="register">     
+          <ToastContainer/>
         <Form id="login" className="login-form" >
         <div className="Welcome">
           <h5>
@@ -63,22 +58,22 @@ const AddServerPage = (props: Props) => {
             onChange={e => setServerIP({ IP: e.target.value })} />
         </FormGroup>
         <FormGroup>
-          <Label>User Name</Label>
+          <Label>DB User Name</Label>
           <Input type="text" name="userName" value={userName.userName} placeholder="DB User Name" className="textfield"
             onChange={e => setuserName({ userName: e.target.value })} />
         </FormGroup>
         <FormGroup>
-          <Label>Password</Label>
+          <Label>DB server password</Label>
           <Input type="text" name="DBPassword" value={credentialDB.credentialDB} placeholder="DB server password" className="textfield"
             onChange={e => setcredentialDB({ credentialDB: e.target.value })} />
         </FormGroup>
         <FormGroup>
-          <Label>Port</Label>
+          <Label>DB Port</Label>
           <Input type="text" name="DBServerPort" value={DBServerPort.DBServerPort} placeholder="DB Server Port" className="textfield"
             onChange={e => setDBServerPort({ DBServerPort: e.target.value })} />
         </FormGroup>
                <FormGroup>
-          <Label>Port</Label>
+          <Label>APP Port</Label>
           <Input type="text" name="AppServerPort" value={AppServerPort.AppServerPort} placeholder="App Server Port" className="textfield"
             onChange={e => setAppServerPort({ AppServerPort: e.target.value })} />
         </FormGroup>

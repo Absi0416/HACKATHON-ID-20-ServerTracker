@@ -27,7 +27,6 @@ async function login(username: any, password: any) {
   
 
   async function register(username: any,email:any, password: any,project:any) {
-    console.log(username);
     var responseData = await userService.register(username,email,password,project);
     if(responseData.statusCode === 200){
    

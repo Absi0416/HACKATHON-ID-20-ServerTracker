@@ -21,8 +21,6 @@ export default function Login() {
       console.log(newRecord);
       var login_response = await userActions.login(email.username, credential.password);
       if(login_response.statusCode == 200){
-       // alert('user logged in successfully');
-        //NotificationManager.success("user logged in successfully");
         toast.success("user logged in successfully", {
           position: "top-center"
         });

@@ -2,52 +2,83 @@ import * as React from 'react';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef, GridRowId, GridRowSelectionModel, GridValueGetterParams } from '@mui/x-data-grid';
 import { ContentPasteSearchOutlined } from '@mui/icons-material';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
 import { serverActions } from '../../actions/ServerActions';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
+import Stack from '@mui/material/Stack';
+import Typography from '@mui/material/Typography';
+//import { PieChart } from '@mui/x-charts/PieChart';
+
 
 export default function DataGridDemo() {
- const userId =  localStorage.getItem("userId")
+ const userId =  localStorage.getItem("userId");
+ var [rows, setRows] = useState([]);
+  useEffect(() => {
+    const getServerDetails = async () => {
+      var userId = localStorage.getItem("userId");
+    console.log(userId);
+  if (userId) {
+    //this.setState({ submitted: true });           
+    var response = await serverActions.getServers(userId);
+    if(response.statusCode == 200){
+      toast.success("Loaded Server Details", {
+        position: "top-center"
+      });
+      setRows(response.data);
+    }
+    else{  
+      toast.error("Server Error", {
+        position: "top-center"
+      });
+    }
+  } else {
+    alert('Please upload the file');
+  }
+}
+getServerDetails();
+},[]);  
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 30 },
+  { field: 'id', headerName: 'ID', width: 40 },
   {
     field: 'serverIp',
     headerName: 'Server IP',
-    width: 100,
+    width: 160,
     editable: true,
   },
   {
     field: 'ServerStatus',
     headerName: 'Server Status',
-    width: 100,
+    width: 150,
     editable: true,
   },
   {
     field: 'dbTableSpaceOccupyPerc',
     headerName: 'DB Table Space Occupy(%)',
     type: 'number',
-    width: 150,
+    width: 200,
     editable: true,
   },
   {
     field: 'appSpaceUsedPerc',
     headerName: 'Disc Space Occupy(%)',
     type: 'number',
-    width: 150,
+    width: 200,
     editable: true,
   },
   {
     field: 'serverCacheStatus',
     headerName: 'POC-AM Cache Status',
     type: 'number',
-    width: 150,
+    width: 200,
     editable: true,
   },
   {
     field: 'liveBillingCatalog',
     headerName: 'Live Billing Catalog',
     type: 'number',
-    width: 150,
+    width: 200,
     editable: true,
   },
   {
@@ -59,28 +90,21 @@ const columns: GridColDef[] = [
   }
 ];
 const [rowSelectionModel, setRowSelectionModel] = React.useState<GridRowSelectionModel>([]);
-const rows = [
-  { id: 1, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
-  { id: 2, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
-  { id: 3, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
-  { id: 4, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
-  { id: 5, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
-  { id: 6, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
-  { id: 7, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
-  { id: 8, lastName: 'Snow', firstName: 'Jon', tableSpace: 14 , discSpace: 'Snow', pocAM: 'Jon', liveCatalog: 14 , team:"Jon"},
-];
-console.log(rowSelectionModel);
 
-const Referesh = async () => {
-    
+const Referesh = async () => {    
   if (userId) {
     //this.setState({ submitted: true });           
     var response = await serverActions.getServers(userId);
     if(response.statusCode == 200){
-      alert('Servers Uploaded successfully');
+      toast.success("Loaded Server Details", {
+        position: "top-center"
+      });
+      setRows(response.data);
     }
-    else{
-      alert('Server Error');
+    else{  
+      toast.error("Server Error", {
+        position: "top-center"
+      });
     }
   } else {
     alert('Please upload the file');
@@ -137,6 +161,7 @@ const Referesh = async () => {
         } }
         rowSelectionModel={rowSelectionModel}
         disableRowSelectionOnClick />
-    </Box></>
+    </Box>
+    <ToastContainer/></>
   );
 }

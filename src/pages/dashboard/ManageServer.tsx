@@ -17,9 +17,6 @@ export default function ManageServerPage() {
           const getAllServers = await serverActions.getServers(userId);
           if(getAllServers){
             setRows(getAllServers);
-            console.log("rows");
-            console.log(rows);
-         //   navigate('/dashboard/default', { state: { reg: "Dashboard" } });
           }
           else{
             alert('Server Error');

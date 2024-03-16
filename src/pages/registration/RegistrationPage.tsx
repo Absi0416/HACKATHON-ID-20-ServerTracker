@@ -4,7 +4,8 @@ import { Form, Button, FormGroup, Input, Label } from 'reactstrap';
 import { userActions } from '../../actions/UserActions';
 import React, { useState } from 'react';
 import backgroundImage from '../../assets/images/nc05.png';
-
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 
 
 export default function RegistrationPage() {
@@ -17,19 +18,22 @@ const navigate = useNavigate();
 const registerUser = async () => {
 
   if (user.username  && email.email && credential.password) {
-    //this.setState({ submitted: true });           
-    //const newRecord = { asdfads: email.email, password: credential.password };
-    //console.log(newRecord);
-    var login_response = await userActions.register(user.username,email.email, credential.password, project.project);
-    if(login_response.statusCode == 200){
-      alert('User Registered successfully');
+    var register_response = await userActions.register(user.username,email.email, credential.password, project.project);
+    if(register_response.statusCode == 200){
+      toast.success("User Registered successfully", {
+        position: "top-center"
+      });
       navigate('/dashboard/default', { state: { reg: "Dashboard" } });
     }
     else{
-      alert('Server Error');
+      toast.error("Server Error.Please contact admin", {
+        position: "top-center"
+      });
     }
   } else {
-    alert('Please fill all the details');
+      toast.error("Please fill all the details", {
+      position: "top-center"
+    });
   }
 
 };
@@ -41,7 +45,7 @@ const routeChange = () => {
   return (
   <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
   <div id="main-registration-container">
-
+  <ToastContainer/>
       <div id="register">     
       <Form id="login" className="login-form" >
       <div className="Welcome">
@@ -79,8 +83,10 @@ const routeChange = () => {
    <Button onClick={routeChange} className="btn btn-lg btn-dark btn-block " style={{ backgroundColor: '#007681', color: '#FFFFFF' }}>Back</Button>
          </Form>
       </div>
+    
   </div>
   </div>
+
   );
 };
 

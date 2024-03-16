@@ -1,3 +1,4 @@
+import { json } from "stream/consumers";
 import { apiConstants } from "../constants/apiConstants";
 import { ServerModel } from "../helpers/ServerModel";
 export const serverService = {
@@ -7,17 +8,17 @@ export const serverService = {
   };
   
 
-  function addServer(registerServer: any) {
-    console.log(registerServer);
-    
+  function addServer(IP:any ,credentialDB:any,userName:any,DBServerPort:any,AppServerPort: any,userId:any) {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'},
-      body: registerServer
+      body:  JSON.stringify({ serverIp: IP,
+      dbUserPassword: credentialDB, 
+      dbUserName: userName, 
+      dbServerPort : DBServerPort,
+      appServerPort : AppServerPort,
+      user:{ id :userId}})
     };
-    console.log("Request");
- console.log(requestOptions);
- console.log("Request");
     return fetch(apiConstants.END_POINT + apiConstants.ADD_SERVER, requestOptions)
       .then(response => {
         if (!response.ok) {
@@ -27,32 +28,21 @@ export const serverService = {
         return response.json();
       })
       .then(user => {    
-        console.log("server add response");  
-        console.log(user);  
         return user;
       });
   }
 
   function getServers(userId: any) {
     console.log("getting all server Details")
-    const requestOptions = {
-      method: 'GET',
-      headers: { 'Content-Type': 'application/json'},
-      mode:'cors',
-      body: JSON.stringify({})
-    };
-   
+  
     return fetch(apiConstants.END_POINT + apiConstants.GET_ALL_SERVERS + userId)
       .then(response => {
         if (!response.ok) {
-            console.log(response);  
           return Promise.reject(response.statusText);
         }  
         return response.json();
       })
       .then(allServers => {    
-        console.log("server Success response");  
-        console.log(allServers);  
         return allServers;
       });
   }

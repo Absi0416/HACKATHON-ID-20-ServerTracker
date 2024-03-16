@@ -12,10 +12,9 @@ export const serverActions = {
     bulkUploadServer
   };
 
-  async function addServer(registerServer: any) {
-    var responseData = await serverService.addServer(registerServer);
+  async function addServer(IP:any ,credentialDB:any,userName:any,DBServerPort:any,AppServerPort: any,userId:any ) {
+    var responseData = await serverService.addServer(IP,credentialDB,userName,DBServerPort,AppServerPort,userId);
     if(responseData.statusCode === 200){
-   
       return responseData
     }
     else {
@@ -26,7 +25,7 @@ export const serverActions = {
   async function getServers(userId: any) {
     var responseData = await serverService.getServers(userId);
     if(responseData.statusCode === 200){
-   
+
       return responseData
     }
     else {
