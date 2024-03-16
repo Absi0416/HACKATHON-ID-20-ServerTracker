@@ -44,29 +44,50 @@ const AddServerPage = (props: Props) => {
         <div id="register">     
         <Form id="login" className="login-form" >
         <div className="Welcome">
-          <h1>
-            <span className="font-weight-bold">Server Registration</span>
-          </h1>
+          <h5>
+            <span className="font-weight-bold">Server Registration Page</span>
+          </h5>
         </div>
-        <FormGroup>
-          <Label>Name</Label>
-          <Input type="text" name="serverName" value={serverName.serverName} placeholder="Server User Name" className="textfield"
-            onChange={e => setServerName({ serverName: e.target.value })} />
-        </FormGroup>
         <FormGroup>
           <Label>Server IP</Label>
           <Input type="text" name="serverIP" value={serverIP.IP} placeholder="IP" className="textfield"
             onChange={e => setServerIP({ IP: e.target.value })} />
         </FormGroup>
         <FormGroup>
+          <Label>User Name</Label>
+          <Input type="text" name="userName" value={serverIP.IP} placeholder="User Name" className="textfield"
+            onChange={e => setServerIP({ IP: e.target.value })} />
+        </FormGroup>
+        <FormGroup>
           <Label>Password</Label>
-          <Input type="text" name="serverPassword" value={credential.password} placeholder="server password" className="textfield"
+          <Input type="text" name="DBPassword" value={credential.password} placeholder="DB server password" className="textfield"
             onChange={e => setPassword({ password: e.target.value })} />
         </FormGroup>
+        <FormGroup>
+          <Label>Port</Label>
+          <Input type="text" name="DBServerPort" value={credential.password} placeholder="DB Server Port" className="textfield"
+            onChange={e => setPassword({ password: e.target.value })} />
+        </FormGroup>
+        <FormGroup>
+          <Label>User Name</Label>
+          <Input type="text" name="AppUserName" value={serverIP.IP} placeholder="App User Name" className="textfield"
+            onChange={e => setServerIP({ IP: e.target.value })} />
+        </FormGroup>
+        <FormGroup>
+          <Label>Password</Label>
+          <Input type="text" name="AppUserPassword" value={credential.password} placeholder="App server password" className="textfield"
+            onChange={e => setPassword({ password: e.target.value })} />
+        </FormGroup>
+        <FormGroup>
+          <Label>Port</Label>
+          <Input type="text" name="AppServerPort" value={credential.password} placeholder="App Server Port" className="textfield"
+            onChange={e => setPassword({ password: e.target.value })} />
+        </FormGroup>
+
         <Button
           variant="contained"
           onClick={registerUser}
-          className="btn btn-lg btn-dark btn-block button ">Register Server</Button>
+          className="btn btn-lg btn-dark btn-block " style={{ backgroundColor: '#007681', color: '#FFFFFF' }}>Register Server</Button>
       </Form>
         </div>
     </div>
