@@ -5,6 +5,6 @@ export const apiConstants = {
     REGISTER: '/user/addUSer',
     CREATE_USER: '',
     DELETE_USER: '',
-    ADD_SERVER:'/user/addServer',
+    ADD_SERVER:'/user/addUserServer',
     GET_ALL_SERVERS:'/user/getAllServer'
 }
