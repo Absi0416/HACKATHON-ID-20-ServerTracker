@@ -9,13 +9,14 @@ export const serverService = {
 
   function addServer(registerServer: any) {
     console.log(registerServer);
+    
     const requestOptions = {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      body: JSON.stringify({ serverUserName : registerServer.serverUserName, serverPassword: registerServer.serverPassword,serverIp:registerServer.serverIp})
+      headers: { 'Content-Type': 'application/json','Access-Control-Allow-Origin': '*'},
+      body: registerServer
     };
     console.log("Request");
- console.log(requestOptions.body);
+ console.log(requestOptions);
  console.log("Request");
     return fetch(apiConstants.END_POINT + apiConstants.ADD_SERVER, requestOptions)
       .then(response => {
