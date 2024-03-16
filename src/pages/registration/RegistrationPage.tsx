@@ -19,7 +19,7 @@ const registerUser = async () => {
 
   if (user.username  && email.email && credential.password) {
     var register_response = await userActions.register(user.username,email.email, credential.password, project.project);
-    if(register_response.statusCode == 200){
+    if(register_response.statusCode === 200){
       toast.success("User Registered successfully", {
         position: "top-center"
       });
@@ -41,7 +41,6 @@ const registerUser = async () => {
 const routeChange = () => {
   navigate('/login', { state: { reg: "Login" } });
 };
-
   return (
   <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
   <div id="main-registration-container">

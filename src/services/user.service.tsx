@@ -13,12 +13,6 @@ function login(username: any, password: any) {
       body: JSON.stringify({ username, password })
     };
 
-    const requestOptions1 = {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      //body: JSON.stringify({ username, password })
-    };
-  
     return fetch(apiConstants.Dummy_end_point + apiConstants.LOGIN, requestOptions)
       .then(response => {
         if (!response.ok) {

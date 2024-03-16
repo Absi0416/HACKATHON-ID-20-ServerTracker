@@ -10,6 +10,9 @@ export const serverActions = {
     addServer,
     getServers,
     getManageServer,
+    getDataDBSpaceChart,
+    getDataDiscSpaceChart,
+    getDataLiveStatusChart,
     bulkUploadServer
   };
 
@@ -42,6 +45,39 @@ export const serverActions = {
       return responseData;
     }
   };
+
+  async function getDataDBSpaceChart(userId: any) {
+    var responseData = await serverService.getDataDBSpaceChart(userId);
+    if(responseData.statusCode === 200){
+      return responseData
+    }
+    else {
+      return responseData;
+    }
+  };
+
+  async function getDataLiveStatusChart(userId: any) {
+    var responseData = await serverService.getDataLiveStatusChart(userId);
+    if(responseData.statusCode === 200){
+      return responseData
+    }
+    else {
+      return responseData;
+    }
+  };
+
+  async function getDataDiscSpaceChart(userId: any) {
+    var responseData = await serverService.getDataDiscSpaceChart(userId);
+    if(responseData.statusCode === 200){
+      return responseData
+    }
+    else {
+      return responseData;
+    }
+  };
+
+
+
 
   async function bulkUploadServer(file: any) {
     var responseData = await serverService.bulkUploadServer(file);

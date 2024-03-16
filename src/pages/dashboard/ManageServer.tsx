@@ -80,23 +80,23 @@ export default function ManageServerPage() {
   };
   const applyCellColour = (value: number) => (value >10 ? 'notApprovedCell' : 'approvedCell'); 
   const columns : GridColDef[] = [
-    { field: 'id', headerName: 'Id', width: 150, cellClassName: params => applyCellColour(params.value), }, 
-    { field: 'serverIp', headerName: 'Server IP', width: 350 },
+    { field: 'id', headerName: 'Id', width: 150, headerClassName: 'super-app-theme--header' }, 
+    { field: 'serverIp', headerName: 'Server IP', width: 350 ,  headerClassName: 'super-app-theme--header'},
     {
       field: 'serverUserName',
       headerName: 'Server User Name',
-      width: 350,
-      editable: false,
+      width: 350,headerClassName: 'super-app-theme--header',
+      editable: false
     },
     {
       field: 'serverPassword',
       headerName: 'server Password',
-      width: 150,
-      editable: false,
+      width: 150,headerClassName: 'super-app-theme--header',
+      editable: false
     },
     {
       field: 'deleteButton',
-      headerName: 'Actions',
+      headerName: 'Actions',headerClassName: 'super-app-theme--header',
       description: 'Actions column.',
       sortable: false,
       width: 160,
@@ -104,8 +104,7 @@ export default function ManageServerPage() {
         return (
           <Button
             onClick={(e) => onButtonClick(e, params.row)}
-            variant="contained"
-          >
+            variant="contained">
             Delete
           </Button>
         );
@@ -118,9 +117,12 @@ export default function ManageServerPage() {
      
   </h1><br></br><div>
 
-      <Box sx={{ height: 500, width: '60%',boxShadow: 2,
+      <Box sx={{ justifyContent: 'center',height: 650, width: '55%',boxShadow: 2,
     border: 2,
-    borderColor: 'primary.light' }}>
+    borderColor: 'primary.light',
+    '& .super-app-theme--header': {
+      backgroundColor: 'RGBA(65,169,159,0.56)',
+    } }}>
         <DataGrid
           rows={rows}
           columns={columns}

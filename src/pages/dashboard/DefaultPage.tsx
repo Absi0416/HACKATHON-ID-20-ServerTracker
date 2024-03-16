@@ -12,34 +12,98 @@ import Typography from '@mui/material/Typography';
 import { PieChart } from '@mui/x-charts/PieChart';
 
 const pieParams = { height: 200, margin: { right: 5 } };
-const palette = ['green', 'blue', 'red'];
-
-
 export default function DataGridDemo() {
  const userId =  localStorage.getItem("userId");
  var [rows, setRows] = useState([]);
+
+ var [dataDBSpace, setDataDBSpace] = useState([] as any);
+ var [dataLiveStatus, setDataLiveStatus] = useState([] as any);
+ var [dataDiscSpace, setDataDiscSpace] = useState([] as any);
   useEffect(() => {
     const getServerDetails = async () => {
-      var userId = localStorage.getItem("userId");
-    console.log(userId);
-  if (userId) {
-    //this.setState({ submitted: true });           
-    var response = await serverActions.getServers(userId);
-    if(response.statusCode == 200){
-      toast.success("Loaded Server Details", {
+    var userId = localStorage.getItem("userId");
+    if (userId) {
+      //this.setState({ submitted: true });           
+      var response = await serverActions.getServers(userId);
+      if(response.statusCode == 200){
+        toast.success("Loaded Server Details", {
+          position: "top-center"
+        });
+        setRows(response.data);
+      }
+      else{  
+        toast.error("Server Error", {
+          position: "top-center"
+        });
+      }
+    } else {
+      toast.error("Server Error", {
         position: "top-center"
       });
-      setRows(response.data);
+    }
+  }
+
+var dataDBSpace = [{ value: 10 ,label: 'Normal'}, { value: 5 ,label: 'Critical'},{ value: 3 ,label: 'Danger'}];
+var dataLiveStatus = [{ value: 3 ,label: 'Live Server'}, { value: 5 ,label: 'Down Server', color:"red"}];
+var dataDiscSpace = [  { value: 10, label: "Normal" },  { value: 15 , label: "Critical"},  { value: 20 , label: "Danger" }];
+
+//
+const getDataDBSpace = async () => {
+  if (userId) {
+  var response = await serverActions.getDataDBSpaceChart(userId);
+  if(response.statusCode == 200){
+    setDataDBSpace(dataDBSpace);
+  }
+  else{  
+    toast.error("Server Error", {
+      position: "top-center"
+    });
+  }
+  } else {
+  toast.error("Server Error", {
+    position: "top-center"
+  });
+  }
+  }
+
+  const getDataLiveStatus = async () => {
+    if (userId) {
+    var response = await serverActions.getDataLiveStatusChart(userId);
+    if(response.statusCode == 200){
+      setDataLiveStatus(dataLiveStatus);
     }
     else{  
       toast.error("Server Error", {
         position: "top-center"
       });
     }
-  } else {
-    alert('Please upload the file');
-  }
-}
+    } else {
+    toast.error("Server Error", {
+      position: "top-center"
+    });
+    }
+    }
+
+    const getDataDiscSpace = async () => {
+      if (userId) {
+      var response = await serverActions.getDataDiscSpaceChart(userId);
+      if(response.statusCode == 200){
+        setDataDiscSpace(dataDiscSpace);
+      }
+      else{  
+        toast.error("Server Error", {
+          position: "top-center"
+        });
+      }
+      } else {
+      toast.error("Server Error", {
+        position: "top-center"
+      });
+      }
+      }
+getDataDiscSpace();
+getDataLiveStatus();
+getDataDBSpace();
 getServerDetails();
 },[]);  
 const columns: GridColDef[] = [
@@ -48,55 +112,61 @@ const columns: GridColDef[] = [
     field: 'serverIp',
     headerName: 'Server IP',
     width: 160,
-    editable: true,
+    editable: false,
   },
   {
     field: 'ServerStatus',
     headerName: 'Server Status',
     width: 150,
-    editable: true,
+    editable: false,
   },
   {
     field: 'dbTableSpaceOccupyPerc',
     headerName: 'DB Table Space Occupy(%)',
     type: 'number',
     width: 200,
-    editable: true,
+    editable: false,
   },
   {
     field: 'appSpaceUsedPerc',
     headerName: 'Disc Space Occupy(%)',
     type: 'number',
     width: 200,
-    editable: true,
+    editable: false,
   },
   {
     field: 'serverCacheStatus',
     headerName: 'POC-AM Cache Status',
     type: 'number',
     width: 200,
-    editable: true,
+    editable: false,
   },
   {
     field: 'liveBillingCatalog',
     headerName: 'Live Billing Catalog',
     type: 'number',
     width: 200,
-    editable: true,
+    editable: false,
   },
   {
     field: 'team',
     headerName: 'Notification Team',
     type: 'number',
-    width: 150,
-    editable: true,
+    width: 200,
+    editable: false,
+  },
+  {
+    field: 'dateTime',
+    headerName: 'Last Updated',
+    type: 'dateTime',
+    width: 200,
+    editable: false,
   }
 ];
 const [rowSelectionModel, setRowSelectionModel] = React.useState<GridRowSelectionModel>([]);
 
 const Referesh = async () => {    
-  if (userId) {
-    //this.setState({ submitted: true });           
+  if (userId) {     
     var response = await serverActions.getServers(userId);
     if(response.statusCode == 200){
       toast.success("Loaded Server Details", {
@@ -112,11 +182,11 @@ const Referesh = async () => {
   } else {
     alert('Please upload the file');
   }
-
 };
 
-var datadbspace = [{ value: 10 ,label: 'Normal'}, { value: 5 ,label: 'Critical'},{ value: 3 ,label: 'Danger'}];
-  return (
+
+
+return (
 
     <>
      <Stack direction="row" width="100%" textAlign="center" spacing={2}>
@@ -124,7 +194,7 @@ var datadbspace = [{ value: 10 ,label: 'Normal'}, { value: 5 ,label: 'Critical'}
         <Typography variant="h2">DB Space</Typography>
         <PieChart
           //colors={palette}
-          series={[{ data: datadbspace,
+          series={[{ data: dataDBSpace,
           highlightScope: { faded: 'global', highlighted: 'item' } ,
           faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },}]}
           {...pieParams}
@@ -134,7 +204,7 @@ var datadbspace = [{ value: 10 ,label: 'Normal'}, { value: 5 ,label: 'Critical'}
         <Typography variant="h2">Live Status</Typography>
         <PieChart
           //colors={palette}
-          series={[{ data: [{ value: 3 ,label: 'Live Count'}, { value: 5 ,label: 'Down Count', color:"red"}],
+          series={[{ data: dataLiveStatus,
           highlightScope: { faded: 'global', highlighted: 'item' } ,
           faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },}]}  
           {...pieParams}
@@ -146,11 +216,7 @@ var datadbspace = [{ value: 10 ,label: 'Normal'}, { value: 5 ,label: 'Critical'}
         //colors={palette}
           series={[
             {
-              data: [
-                { value: 10, label: "Normal" },
-                { value: 15 , label: "Critical"},
-                { value: 20 , label: "Danger" },
-              ],
+              data: dataDiscSpace,
               highlightScope: { faded: 'global', highlighted: 'item' } ,
               faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
             },
@@ -178,28 +244,19 @@ var datadbspace = [{ value: 10 ,label: 'Normal'}, { value: 5 ,label: 'Critical'}
                 Notify
               </Button>
 
-    <Box sx={{ height: 400, width: '100%' }}>
+    <Box sx={{ height: 600, width: '100%' }}>
       <DataGrid
         rows={rows}
         columns={columns}
         initialState={{
           pagination: {
             paginationModel: {
-              pageSize: 5,
+              pageSize: 10,
             },
           },
         }}
-        pageSizeOptions={[5]}
+        pageSizeOptions={[10]}
         checkboxSelection
-        /* onRowSelectionModelChange={(ids) => {
-          const selectedIDs = new Set(ids);
-          var selectedRows = rows.filter((row: { id: GridRowId; }) =>
-            selectedIDs.has(row.id),
-          );
-       
-       
-        setRowSelectionModel(selectedRows);
-        }} */
         onRowSelectionModelChange={(newRowSelectionModel) => {
           setRowSelectionModel(newRowSelectionModel);
         } }

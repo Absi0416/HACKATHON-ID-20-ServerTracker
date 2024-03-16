@@ -1,10 +1,11 @@
-import { json } from "stream/consumers";
 import { apiConstants } from "../constants/apiConstants";
-import { ServerModel } from "../helpers/ServerModel";
 export const serverService = {
     addServer,
     getServers,
     getManageServer,
+    getDataDBSpaceChart,
+    getDataLiveStatusChart,
+    getDataDiscSpaceChart,
     bulkUploadServer
   };
   
@@ -33,10 +34,52 @@ export const serverService = {
       });
   }
 
-  function getManageServer(userId: any) {
+  function getDataLiveStatusChart(userId: any) {
     console.log("getting all server Details")
   
-    return fetch(apiConstants.END_POINT + apiConstants.GET_USER_SERVER + userId)
+    return fetch(apiConstants.END_POINT + apiConstants.SERVER_LIVE_REPORT + userId)
+      .then(response => {
+        if (!response.ok) {
+          return Promise.reject(response.statusText);
+        }  
+        return response.json();
+      })
+      .then(getDBSpaceData => {    
+        return getDBSpaceData;
+      });
+  }
+
+
+  function getDataDBSpaceChart(userId: any) {
+    return fetch(apiConstants.END_POINT + apiConstants.DB_SPACE_REPORT + userId)
+      .then(response => {
+        if (!response.ok) {
+          return Promise.reject(response.statusText);
+        }  
+        return response.json();
+      })
+      .then(getDBSpaceData => {    
+        return getDBSpaceData;
+      });
+  }
+
+  function getDataDiscSpaceChart(userId: any) {
+    return fetch(apiConstants.END_POINT + apiConstants.APP_SPACE_REPORT + userId)
+      .then(response => {
+        if (!response.ok) {
+          return Promise.reject(response.statusText);
+        }  
+        return response.json();
+      })
+      .then(getDBSpaceData => {    
+        return getDBSpaceData;
+      });
+  }
+
+  function getServers(userId: any) {
+    console.log("getting all server Details")
+  
+    return fetch(apiConstants.END_POINT + apiConstants.GET_ALL_SERVERS + userId)
       .then(response => {
         if (!response.ok) {
           return Promise.reject(response.statusText);
@@ -48,10 +91,10 @@ export const serverService = {
       });
   }
 
-  function getServers(userId: any) {
+  function getManageServer(userId: any) {
     console.log("getting all server Details")
   
-    return fetch(apiConstants.END_POINT + apiConstants.GET_ALL_SERVERS + userId)
+    return fetch(apiConstants.END_POINT + apiConstants.GET_USER_SERVER + userId)
       .then(response => {
         if (!response.ok) {
           return Promise.reject(response.statusText);
@@ -72,7 +115,7 @@ export const serverService = {
       body: JSON.stringify({'file':file})
     };
    
-    return fetch(apiConstants.END_POINT + apiConstants.GET_ALL_SERVERS)
+    return fetch(apiConstants.END_POINT + apiConstants.GET_ALL_SERVERS,)
       .then(response => {
         if (!response.ok) {
             console.log(response);  

@@ -4,7 +4,6 @@ import LoginPage from '../pages/login/Login';
 import { RouteType } from "./config";
 import DefaultPage from "../pages/dashboard/DefaultPage";
 import DashboardIndex from "../pages/dashboard/DashboardIndex";
-import ChangelogPage from "../pages/changelog/ChangelogPage";
 import ManageServerPage from "../pages/dashboard/ManageServer";
 import AddServerPage from "../pages/dashboard/AddServerPage";
 import ComponentPageLayout from "../pages/component/ComponentPageLayout";
@@ -12,11 +11,10 @@ import DashboardOutlinedIcon from '@mui/icons-material/DashboardOutlined';
 import AppsOutlinedIcon from '@mui/icons-material/AppsOutlined';
 import ArticleOutlinedIcon from '@mui/icons-material/ArticleOutlined';
 import FormatListBulletedOutlinedIcon from '@mui/icons-material/FormatListBulletedOutlined';
-import FileDownloadOutlinedIcon from '@mui/icons-material/FileDownloadOutlined';
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import AlertPage from "../pages/component/AlertPage";
-import ButtonPage from "../pages/component/ButtonPage";
-import RegistrationPage from "../pages/registration/RegistrationPage";
+import Installedversions from "../pages/component/InstalledversionPage";
+//import RegistrationPage from "../pages/registration/RegistrationPage";
 import DocumentationPage from "../pages/documentation/DocumentationPage";
 
 const appRoutes: RouteType[] = [
@@ -32,8 +30,8 @@ const appRoutes: RouteType[] = [
     state: "home"
   }, 
   {
-    path: "/registration",
-    element: <RegistrationPage />,
+    path: "/dashboard",
+    element: <DashboardIndex />,
     state: "Profile",
     sidebarProps: {
       displayText: "My Profile",
@@ -99,9 +97,9 @@ const appRoutes: RouteType[] = [
         },
       },
       {
-        path: "/component/button",
-        element: <ButtonPage />,
-        state: "component.button",
+        path: "/component/installedversion",
+        element: <Installedversions />,
+        state: "component.installedversion",
         sidebarProps: {
           displayText: "Installed versions"
         }
