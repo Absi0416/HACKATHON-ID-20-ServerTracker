@@ -42,23 +42,28 @@ const registerUser = async () => {
       <Form id="login" className="login-form" >
       <div className="Welcome">
         <h5>
-           <span className="font-weight-bold" style={{ color: '#00274C' }}>💻 Join the NC Server Tracker Registration Community! 💻</span>
+           <span className="font-weight-bold" style={{ color: '#00274C' }}>💻 Join the NC Server Tracker Community! 💻</span>
         </h5>
         <h2></h2>
       </div>
       <FormGroup>
-        <Label>Name</Label>
+      <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Name</Label>
         <Input type="email" name="userName" value={user.username} placeholder="enter user Name" className="textfield"
           onChange={e => setUser({ username: e.target.value })} />
       </FormGroup>
       <FormGroup>
-        <Label>Email</Label>
+      <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Email</Label>
         <Input type="email" name="email" value={email.email} placeholder="enter user Name" className="textfield"
           onChange={e => setEmail({ email: e.target.value })} />
       </FormGroup>
       <FormGroup>
-        <Label>Password</Label>
+      <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Password</Label>
         <Input type="password" name="password" value={credential.password} placeholder="password" className="textfield"
+          onChange={e => setPassword({ password: e.target.value })} />
+      </FormGroup>
+      <FormGroup>
+      <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Project</Label>
+        <Input type="text" name="project" value={user.username} placeholder="Enter Project Name" className="textfield"
           onChange={e => setPassword({ password: e.target.value })} />
       </FormGroup>
       <Button

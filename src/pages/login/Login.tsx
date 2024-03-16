@@ -57,12 +57,12 @@ export default function Login() {
       </div>
     
       <FormGroup>
-        <Label>Email</Label>
+      <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Email</Label>
         <Input type="email" name="email" value={email.username} placeholder="enter user Name" className="textfield"
           onChange={e => setEmail({ username: e.target.value })} />
       </FormGroup>
       <FormGroup>
-        <Label>Password</Label>
+      <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Password</Label>
         <Input type="password" name="password" value={credential.password} placeholder="password" className="textfield"
           onChange={e => setPassword({ password: e.target.value })} />
       </FormGroup>
