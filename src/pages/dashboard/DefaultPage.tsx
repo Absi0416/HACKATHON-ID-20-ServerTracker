@@ -7,43 +7,44 @@ import { Button } from '@mui/material';
 import { serverActions } from '../../actions/ServerActions';
 
 export default function DataGridDemo() {
+ const userId =  localStorage.getItem("userId")
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 30 },
   {
-    field: 'firstName',
+    field: 'serverIp',
     headerName: 'Server IP',
     width: 100,
     editable: true,
   },
   {
-    field: 'lastName',
+    field: 'ServerStatus',
     headerName: 'Server Status',
     width: 100,
     editable: true,
   },
   {
-    field: 'tableSpace',
+    field: 'dbTableSpaceOccupyPerc',
     headerName: 'DB Table Space Occupy(%)',
     type: 'number',
     width: 150,
     editable: true,
   },
   {
-    field: 'discSpace',
+    field: 'appSpaceUsedPerc',
     headerName: 'Disc Space Occupy(%)',
     type: 'number',
     width: 150,
     editable: true,
   },
   {
-    field: 'pocAM',
+    field: 'serverCacheStatus',
     headerName: 'POC-AM Cache Status',
     type: 'number',
     width: 150,
     editable: true,
   },
   {
-    field: 'liveCatalog',
+    field: 'liveBillingCatalog',
     headerName: 'Live Billing Catalog',
     type: 'number',
     width: 150,
@@ -72,9 +73,9 @@ console.log(rowSelectionModel);
 
 const Referesh = async () => {
     
-  if (true) {
+  if (userId) {
     //this.setState({ submitted: true });           
-    var response = await serverActions.getServers();
+    var response = await serverActions.getServers(userId);
     if(response.statusCode == 200){
       alert('Servers Uploaded successfully');
     }

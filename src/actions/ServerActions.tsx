@@ -23,8 +23,8 @@ export const serverActions = {
     }
   };
 
-  async function getServers() {
-    var responseData = await serverService.getServers();
+  async function getServers(userId: any) {
+    var responseData = await serverService.getServers(userId);
     if(responseData.statusCode === 200){
    
       return responseData

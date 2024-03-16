@@ -37,22 +37,18 @@ function login(username: any, password: any) {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' ,'Access-Control-Allow-Origin': '*'},
      
-      body: JSON.stringify({ username,email, password,project })
+      body: JSON.stringify({ name: username, email: email, pass: password, project: project  , status:1})
     };
-    console.log("11111111111111111111111");
-   console.log(registeruser);
-   console.log("11111111111111111111111");
     return fetch(apiConstants.END_POINT + apiConstants.REGISTER, registeruser)
       .then(response => {
+        console.log("response");
+        console.log(response);
         if (!response.ok) {
           return Promise.reject(response.statusText);
         }  
         return response.json();
       })
       .then(user => {      
-        console.log("00000000000000000000");
-   console.log(user);
-   console.log("00000000000000000");
         return user;
       });
     }

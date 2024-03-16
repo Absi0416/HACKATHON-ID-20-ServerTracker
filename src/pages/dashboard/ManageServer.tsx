@@ -11,10 +11,10 @@ export default function ManageServerPage() {
       const navigate = useNavigate();
       useEffect(() => {
         const getUsers = async () => {
-          var userName = localStorage.getItem("userName");
-        console.log(userName);
-        if (userName) {
-          const getAllServers = await serverActions.getServers();
+          var userId = localStorage.getItem("userId");
+        console.log(userId);
+        if (userId) {
+          const getAllServers = await serverActions.getServers(userId);
           if(getAllServers){
             setRows(getAllServers);
             console.log("rows");

@@ -32,7 +32,7 @@ export const serverService = {
       });
   }
 
-  function getServers() {
+  function getServers(userId: any) {
     console.log("getting all server Details")
     const requestOptions = {
       method: 'GET',
@@ -41,7 +41,7 @@ export const serverService = {
       body: JSON.stringify({})
     };
    
-    return fetch(apiConstants.END_POINT + apiConstants.GET_ALL_SERVERS)
+    return fetch(apiConstants.END_POINT + apiConstants.GET_ALL_SERVERS + userId)
       .then(response => {
         if (!response.ok) {
             console.log(response);  

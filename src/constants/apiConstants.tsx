@@ -6,5 +6,5 @@ export const apiConstants = {
     CREATE_USER: '',
     DELETE_USER: '',
     ADD_SERVER:'/user/addServer',
-    GET_ALL_SERVERS:'/user/getAllServer'
+    GET_ALL_SERVERS:'/server/getDashbordDetail?userId='
 }
