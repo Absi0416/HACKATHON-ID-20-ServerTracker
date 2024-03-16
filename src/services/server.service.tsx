@@ -4,6 +4,7 @@ import { ServerModel } from "../helpers/ServerModel";
 export const serverService = {
     addServer,
     getServers,
+    getManageServer,
     bulkUploadServer
   };
   
@@ -29,6 +30,21 @@ export const serverService = {
       })
       .then(user => {    
         return user;
+      });
+  }
+
+  function getManageServer(userId: any) {
+    console.log("getting all server Details")
+  
+    return fetch(apiConstants.END_POINT + apiConstants.GET_USER_SERVER + userId)
+      .then(response => {
+        if (!response.ok) {
+          return Promise.reject(response.statusText);
+        }  
+        return response.json();
+      })
+      .then(allServers => {    
+        return allServers;
       });
   }
 

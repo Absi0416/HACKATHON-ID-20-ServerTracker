@@ -41,7 +41,7 @@ export default function Login() {
     navigate('/registration', { state: { reg: "Registraion" } });
   };
 
-  if(!isLoggedIn) {
+ 
   return (
     <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
     <Form id="login" className="login-form" action="" >
@@ -72,10 +72,5 @@ export default function Login() {
     </Form>
     </div>
   );
-}else {
-  return (
-    
-            <div> Logged User {isLoggedIn} </div>
-  );
 }
-}
+

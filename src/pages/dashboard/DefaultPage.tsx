@@ -9,7 +9,10 @@ import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
-//import { PieChart } from '@mui/x-charts/PieChart';
+import { PieChart } from '@mui/x-charts/PieChart';
+
+const pieParams = { height: 200, margin: { right: 5 } };
+const palette = ['green', 'blue', 'red'];
 
 
 export default function DataGridDemo() {
@@ -112,10 +115,51 @@ const Referesh = async () => {
 
 };
 
-
+var datadbspace = [{ value: 10 ,label: 'Normal'}, { value: 5 ,label: 'Critical'},{ value: 3 ,label: 'Danger'}];
   return (
 
     <>
+     <Stack direction="row" width="100%" textAlign="center" spacing={2}>
+      <Box flexGrow={1}>
+        <Typography variant="h2">DB Space</Typography>
+        <PieChart
+          //colors={palette}
+          series={[{ data: datadbspace,
+          highlightScope: { faded: 'global', highlighted: 'item' } ,
+          faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },}]}
+          {...pieParams}
+        />
+      </Box>
+      <Box flexGrow={1}>
+        <Typography variant="h2">Live Status</Typography>
+        <PieChart
+          //colors={palette}
+          series={[{ data: [{ value: 3 ,label: 'Live Count'}, { value: 5 ,label: 'Down Count', color:"red"}],
+          highlightScope: { faded: 'global', highlighted: 'item' } ,
+          faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },}]}  
+          {...pieParams}
+        />
+      </Box>
+      <Box flexGrow={1}>
+        <Typography variant="h2">Disc Space</Typography>
+        <PieChart
+        //colors={palette}
+          series={[
+            {
+              data: [
+                { value: 10, label: "Normal" },
+                { value: 15 , label: "Critical"},
+                { value: 20 , label: "Danger" },
+              ],
+              highlightScope: { faded: 'global', highlighted: 'item' } ,
+              faded: { innerRadius: 30, additionalRadius: -30, color: 'gray' },
+            },
+          ]}
+          {...pieParams}
+        />
+      </Box>
+    </Stack>
+    <br></br>  <br></br>  <br></br>  <br></br>  <br></br>
     <Button sx={{ marginLeft: "auto" }}
                 style={{ height: "fit-content" }}
                 color="primary"

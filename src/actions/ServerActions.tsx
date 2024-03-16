@@ -9,6 +9,7 @@ type Props = {};
 export const serverActions = {
     addServer,
     getServers,
+    getManageServer,
     bulkUploadServer
   };
 
@@ -25,7 +26,16 @@ export const serverActions = {
   async function getServers(userId: any) {
     var responseData = await serverService.getServers(userId);
     if(responseData.statusCode === 200){
+      return responseData
+    }
+    else {
+      return responseData;
+    }
+  };
 
+  async function getManageServer(userId: any) {
+    var responseData = await serverService.getManageServer(userId);
+    if(responseData.statusCode === 200){
       return responseData
     }
     else {

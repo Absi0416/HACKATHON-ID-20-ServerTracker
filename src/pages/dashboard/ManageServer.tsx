@@ -14,10 +14,29 @@ export default function ManageServerPage() {
           var userId = localStorage.getItem("userId");
         console.log(userId);
         if (userId) {
-          const getAllServers = await serverActions.getServers(userId);
+          const getAllServers = await serverActions.getManageServer(userId);
+          console.log(getAllServers.length);
           if(getAllServers){
-            setRows(getAllServers);
+            let forEachServers: any = [];
+            if(getAllServers.length>0){
+            getAllServers.forEach((server: { serverId: any; serverIp: any ; dbUserName: any ;dbUserPassword:any; }) => {
+
+              var iterate_server= {id: server.serverId,
+              serverIp: server.serverIp,
+              serverUserName:server.dbUserName,
+              serverPassword: server.dbUserPassword
+              }
+
+              forEachServers.push(iterate_server);
+
+              
+            });
           }
+            console.log("get servers by uses")
+            setRows(forEachServers);
+            console.log(forEachServers)
+          }
+
           else{
             alert('Server Error');
           }
@@ -93,57 +112,15 @@ export default function ManageServerPage() {
       },
     },
   ];
-
-   let rows1 = 
- /*   { id: 1, lastName: 'Snow', firstName: 'Jon', age: 35 },
-    { id: 2, lastName: 'Lannister', firstName: 'Cersei', age: 42 },
-    { id: 3, lastName: 'Lannister', firstName: 'Jaime', age: 45 },
-    { id: 4, lastName: 'Stark', firstName: 'Arya', age: 16 },
-    { id: 5, lastName: 'Targaryen', firstName: 'Daenerys', age: null },
-    { id: 6, lastName: 'Melisandre', firstName: null, age: 150 },
-    { id: 7, lastName: 'Clifford', firstName: 'Ferrara', age: 44 },
-    { id: 8, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 9, lastName: 'Roxie', firstName: 'Harvey', age: 65 },
-    { id: 10, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 11, lastName: 'Frances', firstName: 'Rossini', age: 36 },
-    { id: 12, lastName: 'Frances', firstName: 'Rossini', age: 36 }
-  ]; */
-
-  [
-    {
-        "id": 21,
-        "serverIp": "10.112.49.343",
-        "serverUserName": "netcrk",
-        "serverPassword": "crknet"
-    },
-    {
-        "id": 22,
-        "serverIp": "10.112.18.43",
-        "serverUserName": "netcrk",
-        "serverPassword": "crknet"
-    },
-    {
-        "id": 23,
-        "serverIp": "http://10.109.29.202:6400/",
-        "serverUserName": "CRKNET",
-        "serverPassword": "NETCRK"
-    },
-    {
-        "id": 24,
-        "serverIp": "http://10.109.35.195/",
-        "serverUserName": "U32_C5_6400",
-        "serverPassword": "U32_C5_6400"
-    }
-]
-console.log("rows1");
-console.log(rows1);
   return (
     <><h1>
     <span style={{ textAlign: 'center' }}>Manage Server</span>
      
   </h1><br></br><div>
 
-      <Box sx={{ height: 500, width: '90%' }}>
+      <Box sx={{ height: 500, width: '60%',boxShadow: 2,
+    border: 2,
+    borderColor: 'primary.light' }}>
         <DataGrid
           rows={rows}
           columns={columns}
@@ -157,9 +134,10 @@ console.log(rows1);
            />
       </Box>
       {/*  clickedRow: {clickedRow ? `${clickedRow.firstName}` : null} */}
-
+<br></br><br></br>
       <h1>Bulk Upload Servers</h1>
-          <input name="file" type="file" onChange={fileOnchange}/>
+      <br></br><br></br>
+          <input name="file" type="file" onChange={fileOnchange} />
           <button type="submit" onClick={uploadBulkServer}>Upload</button>
          
     </div></>
