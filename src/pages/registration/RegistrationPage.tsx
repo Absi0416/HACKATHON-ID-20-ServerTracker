@@ -12,14 +12,15 @@ export default function RegistrationPage() {
 const [user, setUser] = useState({ username: '' });
 const [email, setEmail] = useState({ email: '' });
 const [credential, setPassword] = useState({ password: '' });
+const [project, setProject] = useState({ project: '' });
 const navigate = useNavigate();
 const registerUser = async () => {
 
   if (user.username  && email.email && credential.password) {
     //this.setState({ submitted: true });           
-    const newRecord = { asdfads: email.email, password: credential.password };
-    console.log(newRecord);
-    var login_response = await userActions.register(email.email, credential.password);
+    //const newRecord = { asdfads: email.email, password: credential.password };
+    //console.log(newRecord);
+    var login_response = await userActions.register(user.username,email.email, credential.password, project.project);
     if(login_response.statusCode == 200){
       alert('User Registered successfully');
       navigate('/dashboard/default', { state: { reg: "Dashboard" } });
@@ -51,7 +52,7 @@ const routeChange = () => {
       </div>
       <FormGroup>
       <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Name</Label>
-        <Input type="email" name="userName" value={user.username} placeholder="Enter User Name" className="textfield"
+        <Input type="text" name="userName" value={user.username} placeholder="Enter User Name" className="textfield"
           onChange={e => setUser({ username: e.target.value })} />
       </FormGroup>
       <FormGroup>
@@ -66,8 +67,8 @@ const routeChange = () => {
       </FormGroup>
       <FormGroup>
       <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Project</Label>
-        <Input type="text" name="project" value={user.username} placeholder="Enter Project Name" className="textfield"
-          onChange={e => setPassword({ password: e.target.value })} />
+        <Input type="text" name="project" value={project.project} placeholder="Enter Project Name" className="textfield"
+          onChange={e => setProject({ project: e.target.value })} />
       </FormGroup>
       <Button
         variant="contained"
