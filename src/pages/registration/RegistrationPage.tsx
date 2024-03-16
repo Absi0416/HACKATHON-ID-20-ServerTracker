@@ -33,6 +33,9 @@ const registerUser = async () => {
 
 };
 
+const routeChange = () => {
+  navigate('/login', { state: { reg: "Login" } });
+};
 
   return (
   <div className="login-container" style={{ backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh' }}>
@@ -48,17 +51,17 @@ const registerUser = async () => {
       </div>
       <FormGroup>
       <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Name</Label>
-        <Input type="email" name="userName" value={user.username} placeholder="enter user Name" className="textfield"
+        <Input type="email" name="userName" value={user.username} placeholder="Enter User Name" className="textfield"
           onChange={e => setUser({ username: e.target.value })} />
       </FormGroup>
       <FormGroup>
       <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Email</Label>
-        <Input type="email" name="email" value={email.email} placeholder="enter user Name" className="textfield"
+        <Input type="email" name="email" value={email.email} placeholder="Enter Email ID" className="textfield"
           onChange={e => setEmail({ email: e.target.value })} />
       </FormGroup>
       <FormGroup>
       <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Password</Label>
-        <Input type="password" name="password" value={credential.password} placeholder="password" className="textfield"
+        <Input type="password" name="password" value={credential.password} placeholder="Enter Your Password" className="textfield"
           onChange={e => setPassword({ password: e.target.value })} />
       </FormGroup>
       <FormGroup>
@@ -71,8 +74,9 @@ const registerUser = async () => {
         onClick={registerUser}
         style={{ backgroundColor: '#007681', color: '#FFFFFF' }}
         className="btn btn-lg btn-dark btn-block button ">Register</Button>
-     
-    </Form>
+   
+   <Button onClick={routeChange} className="btn btn-lg btn-dark btn-block " style={{ backgroundColor: '#007681', color: '#FFFFFF' }}>Back</Button>
+         </Form>
       </div>
   </div>
   </div>

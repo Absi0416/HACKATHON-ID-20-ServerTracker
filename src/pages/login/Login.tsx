@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Form, FormGroup, Label, Input } from 'reactstrap';
 import { userActions } from '../../actions/UserActions';
-import { alertService } from '../../actions/AlterActions';
-import MuiAlert from "@material-ui/lab/Alert";
 import backgroundImage from '../../assets/images/nc05.png';
 
 import { toast, ToastContainer } from 'react-toastify';
@@ -58,12 +56,12 @@ export default function Login() {
     
       <FormGroup>
       <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Email</Label>
-        <Input type="email" name="email" value={email.username} placeholder="enter user Name" className="textfield"
+        <Input type="email" name="email" value={email.username} placeholder="Enter Your Email" className="textfield"
           onChange={e => setEmail({ username: e.target.value })} />
       </FormGroup>
       <FormGroup>
       <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Password</Label>
-        <Input type="password" name="password" value={credential.password} placeholder="password" className="textfield"
+        <Input type="password" name="password" value={credential.password} placeholder="Enter Your Password" className="textfield"
           onChange={e => setPassword({ password: e.target.value })} />
       </FormGroup>
       <Button
