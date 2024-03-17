@@ -7,6 +7,7 @@ import SidebarItem from "./SidebarItem";
 import SidebarItemCollapse from "./SidebarItemCollapse";
 
 const Sidebar = () => {
+  var userName = localStorage.getItem("userName");
   return (
     <Drawer
       variant="permanent"
@@ -22,7 +23,9 @@ const Sidebar = () => {
         }
       }}
     >
+    
       <List disablePadding>
+     
         <Toolbar sx={{ marginBottom: "20px" }}>
           <Stack
             sx={{ width: "100%" }}
@@ -31,7 +34,9 @@ const Sidebar = () => {
           >
             <Avatar src={assets.images.logo} />
           </Stack>
+         
         </Toolbar>
+        <h3>Welcome {userName}</h3>
         {appRoutes.map((route, index) => (
           route.sidebarProps ? (
             route.child ? (

@@ -16,8 +16,8 @@ async function login(username: any, password: any) {
     var responseData = await userService.login(username,password);
     if(responseData.statusCode == 200){
       console.log(responseData.response.userId);
-      localStorage.setItem('userId', JSON.stringify(responseData.response.userId));
-      localStorage.setItem('userName', JSON.stringify(responseData.response.userName));
+      localStorage.setItem('userId', responseData.response.userId);
+      localStorage.setItem('userName', responseData.response.userName);
       return responseData
     }
     else {
