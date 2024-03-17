@@ -5,7 +5,7 @@ import { serverActions } from '../../actions/ServerActions';
 import { ServerModel } from "../../helpers/ServerModel";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
-import backgroundImage from '../../assets/images/n12.png';
+import backgroundImage from '../../assets/images/nc05.png';
 type Props = {};
 
 const AddServerPage = (props: Props) => {
