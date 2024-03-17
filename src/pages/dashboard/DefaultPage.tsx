@@ -30,6 +30,7 @@ export default function DataGridDemo() {
         toast.success("Loaded Server Details", {
           position: "top-center"
         });
+       
         setRows(response.data);
       }
       else{  
@@ -108,9 +109,36 @@ getDataDBSpace();
 getServerDetails();
 },[]);  
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 40 },
+  { field: 'id', headerName: 'ID', width: 40},
   { field: 'serverIp', headerName: 'Server IP', width: 160, editable: false },
-  { field: 'ServerStatus', headerName: 'Server Status', width: 150, editable: false },
+
+  { field: 'appServerStatus', 
+  headerName: 'Server Status',
+   width: 150, 
+   editable: false,
+   renderCell: (params) => {
+    const value = params.value as string; // Assuming the value is a string
+    let backgroundColor = '';
+    let displayValue = '';
+    switch (value) {
+      case 'Available':
+        backgroundColor = '#81C784';
+        displayValue = value;
+        break;
+            case 'Not Available':
+        backgroundColor = '#EF9A9A';
+        displayValue = value;
+        break;
+            }
+    return (
+      <div style={{ backgroundColor, fontSize: '25px', fontWeight: 'bold' }}>
+        {displayValue}
+      </div>
+    );
+
+    },
+
+   },
   {
     field: 'dbTableSpaceOccupyPerc',
     headerName: 'DB Table Space Occupy(%)',
