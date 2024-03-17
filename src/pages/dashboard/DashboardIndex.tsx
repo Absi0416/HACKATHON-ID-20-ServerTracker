@@ -51,7 +51,11 @@ const DashboardIndex = (props: Props) => {
               <h4 className="mb-0">Project</h4>
               <span>{projects}</span>
               </div><br></br>
-
+              </div>
+            <div className="stats">
+              <h4 className="mb-0">Total Servers</h4>
+              <span>{projects}</span>
+             
 {/* 
             <div className="stats">
               <h6 className="mb-0">Ranks</h6>

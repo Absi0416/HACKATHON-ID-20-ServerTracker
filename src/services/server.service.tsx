@@ -106,26 +106,20 @@ export const serverService = {
       });
   }
 
-  function bulkUploadServer(file:any) {
-    console.log("Upload all server Details")
-    const requestOptions = {
+  function bulkUploadServer(file:FormData, userId : any) {
+    console.log("Upload all server Details");
+   return fetch(apiConstants.END_POINT + apiConstants.ADD_SERVER_BULK + userId, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json'},
-      mode:'cors',
-      body: JSON.stringify({'file':file})
-    };
-   
-    return fetch(apiConstants.END_POINT + apiConstants.GET_ALL_SERVERS,)
-      .then(response => {
-        if (!response.ok) {
-            console.log(response);  
-          return Promise.reject(response.statusText);
-        }  
-        return response.json();
-      })
-      .then(allServers => {    
-        console.log("server Success response");  
-        console.log(allServers);  
-        return allServers;
-      });
+    body: file
+  }).then(response => {
+    if (!response.ok) {
+        console.log(response);  
+      return Promise.reject(response.statusText);
+    }  
+    return response.json();
+  })
+  .then(allServers => {    
+    return allServers;
+  });
+      
   }

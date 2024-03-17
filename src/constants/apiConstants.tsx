@@ -10,5 +10,6 @@ export const apiConstants = {
     DB_SPACE_REPORT:'/server/dbSpaceStatusReport?userId=',
     SERVER_LIVE_REPORT:'/server/serverLiveStatusReport?userId=',
     APP_SPACE_REPORT:'/server/appSpaceStatusReport?userId=',
-    ADD_SERVER:'/user/addUserServer'
+    ADD_SERVER:'/user/addUserServer',
+    ADD_SERVER_BULK:'/user/createUserServerWithCSV?userId='
 }

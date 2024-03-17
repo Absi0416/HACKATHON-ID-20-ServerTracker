@@ -79,10 +79,9 @@ export const serverActions = {
 
 
 
-  async function bulkUploadServer(file: any) {
-    var responseData = await serverService.bulkUploadServer(file);
+  async function bulkUploadServer(file: FormData,userId: any) {
+    var responseData = await serverService.bulkUploadServer(file, userId);
     if(responseData.statusCode === 200){
-   
       return responseData
     }
     else {

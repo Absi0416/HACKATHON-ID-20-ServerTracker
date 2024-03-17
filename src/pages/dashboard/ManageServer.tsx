@@ -5,13 +5,16 @@ import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import { Button } from '@mui/material';
 import { serverActions } from '../../actions/ServerActions';
 import { useNavigate } from 'react-router-dom';
+import { toast, ToastContainer } from 'react-toastify';
+import "react-toastify/dist/ReactToastify.css";
 type Props = {};
 export default function ManageServerPage() {
       const [rows, setRows] = useState([]);
       const navigate = useNavigate();
+      var userId = localStorage.getItem("userId");
       useEffect(() => {
         const getUsers = async () => {
-          var userId = localStorage.getItem("userId");
+        
         console.log(userId);
         if (userId) {
           const getAllServers = await serverActions.getManageServer(userId);
@@ -56,25 +59,34 @@ export default function ManageServerPage() {
     setClickedRow(row);
   };
  
-  const [file, setFile] = useState()
+  const [file, setFile] = useState();
 
   function fileOnchange(event:any) {
-    setFile(event.target.files[0])
+    console.log(event);
+    console.log(event.target.files[0]);
+    setFile(event.target.files[0]);
   }
   const uploadBulkServer = async () => {
-    
+    console.log(file);
     if (file) {
-      //this.setState({ submitted: true });           
-      var response = await serverActions.bulkUploadServer(file);
+    const formData = new FormData();
+    formData.append('file', file);
+    var response = await serverActions.bulkUploadServer(formData,userId);
       if(response.statusCode == 200){
-        alert('Servers Uploaded successfully');
-        navigate('/dashboard/manageserver', { state: { reg: "manageserver" } });
+        toast.success("Bulk upload Server Successfully", {
+          position: "top-center"
+        });
+        //navigate('/dashboard/manageserver', { state: { reg: "manageserver" } });
       }
       else{
-        alert('Server Error');
+        toast.error("Server Error", {
+          position: "top-center"
+        });
       }
     } else {
-      alert('Please upload the file');
+      toast.error("Please upload file", {
+        position: "top-center"
+      });
     }
   
   };
@@ -112,7 +124,7 @@ export default function ManageServerPage() {
     },
   ];
   return (
-    <><h1>
+    <> <ToastContainer/><h1>
     <span style={{ textAlign: 'center' }}>Manage Server</span>
      
   </h1><br></br><div>
