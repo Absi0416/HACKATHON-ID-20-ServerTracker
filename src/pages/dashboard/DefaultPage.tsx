@@ -10,7 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { PieChart } from '@mui/x-charts/PieChart';
-import './style.css';
+
 
 const pieParams = { height: 200, margin: { right: 5 } };
 export default function DataGridDemo() {
