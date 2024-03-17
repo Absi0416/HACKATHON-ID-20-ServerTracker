@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
-import { DataGrid, GridColDef, GridRowId, GridRowSelectionModel, GridValueGetterParams } from '@mui/x-data-grid';
+import { DataGrid, GridCellParams, GridColDef, GridRowId, GridRowSelectionModel, GridValueGetterParams } from '@mui/x-data-grid';
 import { ContentPasteSearchOutlined } from '@mui/icons-material';
 import { useEffect, useState } from 'react';
 import { Button } from '@mui/material';
@@ -10,6 +10,7 @@ import "react-toastify/dist/ReactToastify.css";
 import Stack from '@mui/material/Stack';
 import Typography from '@mui/material/Typography';
 import { PieChart } from '@mui/x-charts/PieChart';
+import './style.css';
 
 const pieParams = { height: 200, margin: { right: 5 } };
 export default function DataGridDemo() {
@@ -107,25 +108,30 @@ getDataDBSpace();
 getServerDetails();
 },[]);  
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 40 },
-  {
-    field: 'serverIp',
-    headerName: 'Server IP',
-    width: 160,
-    editable: false,
-  },
-  {
-    field: 'ServerStatus',
-    headerName: 'Server Status',
-    width: 150,
-    editable: false,
-  },
+  { field: 'id', headerName: 'ID', width: 40, },
+  { field: 'serverIp', headerName: 'Server IP', width: 160, editable: false },
+  { field: 'ServerStatus', headerName: 'Server Status', width: 150, editable: false },
   {
     field: 'dbTableSpaceOccupyPerc',
     headerName: 'DB Table Space Occupy(%)',
     type: 'number',
     width: 200,
-    editable: false,
+    renderCell: (params) => {
+      const value = params.value as number;
+      let backgroundColor = '';
+      if (value < 50) {
+        backgroundColor = '#81C784';
+      } else if (value < 80) {
+        backgroundColor = '#FFF59D';
+      } else {
+        backgroundColor = '#EF9A9A';
+      }
+      return (
+        <div style={{ backgroundColor, fontSize: '25px', fontWeight: 'bold' }}>
+          {params.value}
+        </div>
+      );
+    },
   },
   {
     field: 'appSpaceUsedPerc',
@@ -133,7 +139,23 @@ const columns: GridColDef[] = [
     type: 'number',
     width: 200,
     editable: false,
-  },
+    renderCell: (params) => {
+      const value = params.value as number;
+      let backgroundColor = '';
+      if (value < 50) {
+        backgroundColor = '#81C784';
+      } else if (value < 80) {
+        backgroundColor = '#FFF59D';
+      } else {
+        backgroundColor = '#EF9A9A';
+      }
+      return (
+        <div  style={{ backgroundColor, fontSize: '25px', fontWeight: 'bold' }}>
+          {params.value}
+        </div>
+      );
+    },
+      },
   {
     field: 'serverCacheStatus',
     headerName: 'POC-AM Cache Status',
@@ -147,6 +169,13 @@ const columns: GridColDef[] = [
     type: 'number',
     width: 200,
     editable: false,
+    renderCell: (params) => {
+      return (
+        <div style={{ fontSize: '20px', fontWeight: 'normal' }}>
+          {params.value}
+        </div>
+      );
+    },
   },
   {
     field: 'team',
