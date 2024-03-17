@@ -5,6 +5,7 @@ import { serverActions } from '../../actions/ServerActions';
 import { ServerModel } from "../../helpers/ServerModel";
 import { toast, ToastContainer } from 'react-toastify';
 import "react-toastify/dist/ReactToastify.css";
+import backgroundImage from '../../assets/images/n12.png';
 type Props = {};
 
 const AddServerPage = (props: Props) => {
@@ -42,8 +43,8 @@ const AddServerPage = (props: Props) => {
   
   
     return (
-
-    <div id="main-registration-container">  
+      
+         <div id="main-registration-container" style={{backgroundImage: `url(${backgroundImage})`, backgroundSize: 'cover', backgroundPosition: 'center', minHeight: '100vh'}}>  
         <div id="register">     
           <ToastContainer/>
         <Form id="login" className="login-form" >
@@ -53,27 +54,27 @@ const AddServerPage = (props: Props) => {
           </h5>
         </div>
         <FormGroup>
-          <Label>Server IP</Label>
+          <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>Server IP</Label>
           <Input type="text" name="serverIP" value={serverIP.IP} placeholder="IP" className="textfield"
             onChange={e => setServerIP({ IP: e.target.value })} />
         </FormGroup>
         <FormGroup>
-          <Label>DB User Name</Label>
+          <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>DB User Name</Label>
           <Input type="text" name="userName" value={userName.userName} placeholder="DB User Name" className="textfield"
             onChange={e => setuserName({ userName: e.target.value })} />
         </FormGroup>
         <FormGroup>
-          <Label>DB server password</Label>
+          <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>DB server password</Label>
           <Input type="text" name="DBPassword" value={credentialDB.credentialDB} placeholder="DB server password" className="textfield"
             onChange={e => setcredentialDB({ credentialDB: e.target.value })} />
         </FormGroup>
         <FormGroup>
-          <Label>DB Port</Label>
+          <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>DB Port</Label>
           <Input type="text" name="DBServerPort" value={DBServerPort.DBServerPort} placeholder="DB Server Port" className="textfield"
             onChange={e => setDBServerPort({ DBServerPort: e.target.value })} />
         </FormGroup>
                <FormGroup>
-          <Label>APP Port</Label>
+          <Label style={{ fontWeight: 'bold', fontStyle: 'italic', fontFamily: 'Arial, sans-serif' }}>APP Port</Label>
           <Input type="text" name="AppServerPort" value={AppServerPort.AppServerPort} placeholder="App Server Port" className="textfield"
             onChange={e => setAppServerPort({ AppServerPort: e.target.value })} />
         </FormGroup>
