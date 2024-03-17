@@ -30,7 +30,7 @@ const appRoutes: RouteType[] = [
     state: "home"
   }, 
   {
-    path: "/dashboard",
+    path: "/profile",
     element: <DashboardIndex />,
     state: "Profile",
     sidebarProps: {
@@ -57,7 +57,7 @@ const appRoutes: RouteType[] = [
         element: <DefaultPage />,
         state: "dashboard.default",
         sidebarProps: {
-          displayText: "Default"
+          displayText: "Tracker"
         },
       },
       
@@ -88,14 +88,14 @@ const appRoutes: RouteType[] = [
       icon: <AppsOutlinedIcon />
     },
     child: [
-      {
+    /*   {
         path: "/component/alert",
         element: <AlertPage />,
         state: "component.alert",
         sidebarProps: {
           displayText: "POC-AM CACHE"
         },
-      },
+      }, */
       {
         path: "/component/installedversion",
         element: <Installedversions />,
@@ -114,7 +114,7 @@ const appRoutes: RouteType[] = [
       displayText: "Documentation",
       icon: <ArticleOutlinedIcon />
     }
-  },
+  }/* ,
   {
     path: "/login",
     element: <LoginPage />,
@@ -123,7 +123,7 @@ const appRoutes: RouteType[] = [
       displayText: "Login",
       icon: <FormatListBulletedOutlinedIcon />
     }
-  }
+  } */
 ];
 
 export default appRoutes;
