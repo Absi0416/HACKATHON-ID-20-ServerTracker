@@ -117,28 +117,26 @@ const columns: GridColDef[] = [
    width: 150, 
    editable: false,
    renderCell: (params) => {
-    const value = params.value as string; // Assuming the value is a string
-    let backgroundColor = '';
-    let displayValue = '';
+    const value = params.value as string; 
+    let color = ''; // Default font color
+    let displayValue='';
     switch (value) {
       case 'Available':
-        backgroundColor = '#81C784';
+       color='#81C784';
         displayValue = value;
         break;
-            case 'Not Available':
-        backgroundColor = '#EF9A9A';
+      case 'Not Available':
+        color = '#EF9A9A';
         displayValue = value;
         break;
             }
+    // Check the value of 'Server Status' and set color accordingly
+    
     return (
-      <div style={{ backgroundColor, fontSize: '25px', fontWeight: 'bold' }}>
-        {displayValue}
-      </div>
+      <div style={{ color, fontSize: '20px' }}>{params.value}</div>
     );
-
-    },
-
-   },
+  },
+},
   {
     field: 'dbTableSpaceOccupyPerc',
     headerName: 'DB Table Space Occupy(%)',
