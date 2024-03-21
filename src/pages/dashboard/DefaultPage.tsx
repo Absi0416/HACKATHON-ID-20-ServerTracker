@@ -133,11 +133,11 @@ getServerDetails();
 
 },[]);  
 const columns: GridColDef[] = [
-  { field: 'id', headerName: 'ID', width: 40},
-  { field: 'serverIp', headerName: 'Server IP', width: 160, editable: false },
+  { field: 'id', headerName: 'ID', headerClassName: 'super-app-theme--header',width: 40},
+  { field: 'serverIp', headerName: 'Server IP', width: 160, headerClassName: 'super-app-theme--header',editable: false },
 
   { field: 'appServerStatus', 
-  headerName: 'Server Status',
+  headerName: 'Server Status',headerClassName: 'super-app-theme--header',
    width: 150, 
    editable: false,
    renderCell: (params) => {
@@ -164,7 +164,7 @@ const columns: GridColDef[] = [
   {
     field: 'dbTableSpaceOccupyPerc',
     headerName: 'DB Table Space Occupy(%)',
-    type: 'number',
+    type: 'number',headerClassName: 'super-app-theme--header',
     width: 200,
     renderCell: (params) => {
       const value = params.value as number;
@@ -187,7 +187,7 @@ const columns: GridColDef[] = [
   {
     field: 'appSpaceUsedPerc',
     headerName: 'Disc Space Occupy(%)',
-    type: 'number',
+    type: 'number',headerClassName: 'super-app-theme--header',
     width: 200,
     editable: false,
     renderCell: (params) => {
@@ -214,7 +214,7 @@ const columns: GridColDef[] = [
   {
     field: 'serverCacheStatus',
     headerName: 'POC-AM Cache Status',
-    type: 'number',
+    type: 'number',headerClassName: 'super-app-theme--header',
     width: 200,
     editable: false,
     renderCell: (params) => {
@@ -246,7 +246,7 @@ const columns: GridColDef[] = [
   {
     field: 'liveBillingCatalog',
     headerName: 'Live Billing Catalog',
-    type: 'number',
+    type: 'number',headerClassName: 'super-app-theme--header',
     width: 200,
     editable: false,
     renderCell: (params) => {
@@ -260,13 +260,13 @@ const columns: GridColDef[] = [
   {
     field: 'team',
     headerName: 'Notification Team',
-    type: 'number',
+    type: 'number',headerClassName: 'super-app-theme--header',
     width: 200,
     editable: false,
   },
   {
     field: 'dateTime',
-    headerName: 'Last Updated',
+    headerName: 'Last Updated',headerClassName: 'super-app-theme--header',
     type: 'dateTime',
     width: 200,
     editable: false,
@@ -353,7 +353,12 @@ return (
                 Notify
               </Button>
 
-    <Box sx={{ height: 600, width: '100%' }}>
+    <Box sx={{ justifyContent: 'center',height: 650, width: '100%',boxShadow: 2,
+    border: 2,
+    borderColor: 'primary.light',
+    '& .super-app-theme--header': {
+      backgroundColor: 'RGBA(65,169,159,0.56)',
+    } }}>
       <DataGrid
         rows={rows}
         columns={columns}
