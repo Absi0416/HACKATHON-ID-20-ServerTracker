@@ -30,8 +30,14 @@ export default function DataGridDemo() {
         toast.success("Loaded Server Details", {
           position: "top-center"
         });
-       
-        setRows(response.data);
+       if(response.data){
+        var filtered = response.data.filter(function (el: any) {
+          return el != null;
+        });
+        
+        console.log(filtered);
+       }
+        setRows(filtered);
       }
       else{  
         toast.error("Server Error", {
@@ -45,16 +51,24 @@ export default function DataGridDemo() {
     }
   }
 
-var dataDBSpace = [{ value: 10 ,label: 'Normal'}, { value: 5 ,label: 'Critical'},{ value: 3 ,label: 'Danger'}];
+/* var dataDBSpace = [{ value: 10 ,label: 'Normal'}, { value: 5 ,label: 'Critical'},{ value: 3 ,label: 'Danger'}];
 var dataLiveStatus = [{ value: 3 ,label: 'Live Server'}, { value: 5 ,label: 'Down Server', color:"red"}];
 var dataDiscSpace = [  { value: 10, label: "Normal" },  { value: 15 , label: "Critical"},  { value: 20 , label: "Danger" }];
-
+ */
 //
 const getDataDBSpace = async () => {
   if (userId) {
   var response = await serverActions.getDataDBSpaceChart(userId);
-  if(response.statusCode == 200){
-    setDataDBSpace(dataDBSpace);
+  if(response.status == 200){
+    for (let [key, value] of Object.entries(response.data)) {
+      console.log(key + ": " + value); // Output: name: John, age: 30, city: New York
+      dataDBSpace.push({"value":value,label:key});
+      }
+      setDataDBSpace([]);
+      console.log(dataDBSpace);
+      console.log("**************")
+      console.log(dataDBSpace);
+      setDataDBSpace(dataDBSpace);
   }
   else{  
     toast.error("Server Error", {
@@ -71,7 +85,11 @@ const getDataDBSpace = async () => {
   const getDataLiveStatus = async () => {
     if (userId) {
     var response = await serverActions.getDataLiveStatusChart(userId);
-    if(response.statusCode == 200){
+    if(response.status == 200){
+      for (let [key, value] of Object.entries(response.data)) {
+        console.log(key + ": " + value); // Output: name: John, age: 30, city: New York
+        dataLiveStatus.push({"value":value,label:key});
+        }
       setDataLiveStatus(dataLiveStatus);
     }
     else{  
@@ -89,7 +107,12 @@ const getDataDBSpace = async () => {
     const getDataDiscSpace = async () => {
       if (userId) {
       var response = await serverActions.getDataDiscSpaceChart(userId);
-      if(response.statusCode == 200){
+      if(response.status == 200){
+        setDataDiscSpace([]);
+        for (let [key, value] of Object.entries(response.data)) {
+          console.log(key + ": " + value); // Output: name: John, age: 30, city: New York
+          dataDiscSpace.push({"value":value,label:key});
+          }
         setDataDiscSpace(dataDiscSpace);
       }
       else{  
@@ -107,6 +130,7 @@ getDataDiscSpace();
 getDataLiveStatus();
 getDataDBSpace();
 getServerDetails();
+
 },[]);  
 const columns: GridColDef[] = [
   { field: 'id', headerName: 'ID', width: 40},

@@ -48,7 +48,7 @@ export const serverActions = {
 
   async function getDataDBSpaceChart(userId: any) {
     var responseData = await serverService.getDataDBSpaceChart(userId);
-    if(responseData.statusCode === 200){
+    if(responseData.status === 200){
       return responseData
     }
     else {
@@ -58,7 +58,7 @@ export const serverActions = {
 
   async function getDataLiveStatusChart(userId: any) {
     var responseData = await serverService.getDataLiveStatusChart(userId);
-    if(responseData.statusCode === 200){
+    if(responseData.status === 200){
       return responseData
     }
     else {
@@ -68,7 +68,7 @@ export const serverActions = {
 
   async function getDataDiscSpaceChart(userId: any) {
     var responseData = await serverService.getDataDiscSpaceChart(userId);
-    if(responseData.statusCode === 200){
+    if(responseData.status === 200){
       return responseData
     }
     else {

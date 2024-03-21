@@ -7,9 +7,9 @@ export const apiConstants = {
     DELETE_USER: '',
     GET_ALL_SERVERS:'/server/getDashbordDetail?userId=',
     GET_USER_SERVER:'/user/getUserServerBasedOnUserId?userId=',
-    DB_SPACE_REPORT:'/server/dbSpaceStatusReport?userId=',
-    SERVER_LIVE_REPORT:'/server/serverLiveStatusReport?userId=',
-    APP_SPACE_REPORT:'/server/appSpaceStatusReport?userId=',
+    DB_SPACE_REPORT:'/server/dbSpaceStatusReprot?userId=',
+    SERVER_LIVE_REPORT:'/server/getServerLiveStatusReprot?userId=',
+    APP_SPACE_REPORT:'/server/appSpaceStatusReprot?userId=',
     ADD_SERVER:'/user/addUserServer',
     ADD_SERVER_BULK:'/user/createUserServerWithCSV?userId='
 }
