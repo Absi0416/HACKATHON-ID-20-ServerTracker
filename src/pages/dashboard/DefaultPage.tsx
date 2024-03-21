@@ -168,16 +168,17 @@ const columns: GridColDef[] = [
     width: 200,
     renderCell: (params) => {
       const value = params.value as number;
-      let backgroundColor = '';
+           let color = ''; // Default font color
+    let displayValue='';
       if (value < 50) {
-        backgroundColor = '#81C784';
+        color = '#81C784';
       } else if (value < 80) {
-        backgroundColor = '#FFF59D';
+        color = '#81C784';
       } else {
-        backgroundColor = '#EF9A9A';
+        color = '#EF9A9A';
       }
       return (
-        <div style={{ backgroundColor, fontSize: '25px', fontWeight: 'bold' }}>
+        <div style={{color, fontSize: '25px', fontWeight: 'bold' }}>
           {params.value}
         </div>
       );
@@ -191,16 +192,20 @@ const columns: GridColDef[] = [
     editable: false,
     renderCell: (params) => {
       const value = params.value as number;
-      let backgroundColor = '';
+      let color = ''; // Default font color
+      let displayValue=Number;
       if (value < 50) {
-        backgroundColor = '#81C784';
+        color = '#81C784';
+        displayValue = Number;
       } else if (value < 80) {
-        backgroundColor = '#FFF59D';
+        color = '#FFF59D';
+        displayValue = Number;
       } else {
-        backgroundColor = '#EF9A9A';
+        color = '#EF9A9A';
+        displayValue = Number;
       }
       return (
-        <div  style={{ backgroundColor, fontSize: '25px', fontWeight: 'bold' }}>
+        <div  style={{ color, fontSize: '25px', fontWeight: 'bold' }}>
           {params.value}
         </div>
       );
@@ -214,24 +219,24 @@ const columns: GridColDef[] = [
     editable: false,
     renderCell: (params) => {
       const value = params.value as string; // Assuming the value is a string
-      let backgroundColor = '';
-      let displayValue = '';
+      let color = ''; // Default font color
+      let displayValue='';
       switch (value) {
         case 'Live':
-          backgroundColor = '#81C784';
+          color = '#81C784';
           displayValue = value;
           break;
         case 'Superseded':
-          backgroundColor = '#808080';
+          color = '#808080';
           displayValue = value;
           break;
         case 'Error':
-          backgroundColor = '#EF9A9A';
+          color = '#EF9A9A';
           displayValue = value;
           break;
               }
       return (
-        <div style={{ backgroundColor, fontSize: '25px', fontWeight: 'bold' }}>
+        <div style={{ color, fontSize: '25px', fontWeight: 'bold' }}>
           {displayValue}
         </div>
       );
