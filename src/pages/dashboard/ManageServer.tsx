@@ -129,7 +129,7 @@ export default function ManageServerPage() {
      
   </h1><br></br><div>
 
-      <Box sx={{ justifyContent: 'center',height: 650, width: '55%',boxShadow: 2,
+      <Box sx={{ justifyContent: 'center',height: 500, width: '75%',boxShadow: 2,
     border: 2,
     borderColor: 'primary.light',
     '& .super-app-theme--header': {
@@ -149,8 +149,8 @@ export default function ManageServerPage() {
       </Box>
       {/*  clickedRow: {clickedRow ? `${clickedRow.firstName}` : null} */}
 <br></br><br></br>
-      <h1>Bulk Upload Servers</h1>
-      <br></br><br></br>
+      <h3>Bulk Upload Servers</h3>
+      <br></br>
           <input name="file" type="file" onChange={fileOnchange} />
           <button type="submit" onClick={uploadBulkServer}>Upload</button>
          
